@@ -5,8 +5,7 @@
             <ul>
                 <li><h1>{{Articles.articleTitle}}</h1></li>
                 <li>{{Articles.articleDate}}</li>
-                <li v-if="articleLikeCount_status"><el-button @click="getLikeCount">点赞</el-button></li>
-                <li v-else><el-button>已点赞</el-button></li>
+                <li><el-button @click="getLikeCount">点赞</el-button></li>
             </ul>
         </div>
         <div class="contain">
@@ -26,8 +25,7 @@ export default {
     data() {
         return {
             Articles:[],
-            articleLikeCount:'',
-            articleLikeCount_status: true
+            articleLikeCount:''
         }
     },
     mounted () {
@@ -45,11 +43,11 @@ export default {
         //点赞
         getLikeCount () {
             this.$axios.post('/articles/'+this.$route.query.id + '/addCount',{
-                articleLikeCount: this.Articles.articleLikeCount
+                // articleLikeCount: this.Articles.articleLikeCount,
+                ip:localStorage.getItem("Ip")
             }).then(res=>{
-                if(res&&res.data.code === 200){
+                if(res.status === 200){
                     console.log("点赞成功!");
-                    this.articleLikeCount_status = false
                 }
             })
         }
