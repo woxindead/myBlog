@@ -39,4 +39,5 @@ public class ArticleService {
     public void updateArticle(Article article){
         articleDAO.save(article);
     }
+
 }

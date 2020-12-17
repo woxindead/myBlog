@@ -27,17 +27,15 @@ public class ArticleController {
     public Result getArticleDetails(@PathVariable("id") int id){
         return ResultFactory.buildSuccessResult(articleService.findById(id));
     }
-
-    /**
-     * 给文章点赞
-     * @param article
-     * @return
-     */
+    //给文章点赞
     @CrossOrigin
     @PostMapping("/api/articles/{id}/addCount")
-    public Result getAddCount(@RequestBody @Valid Article article){
-        article.setArticleLikeCount(article.getArticleLikeCount()+1);
-        return ResultFactory.buildSuccessResult("点赞成功");
+    public Article getAddCount(@PathVariable("id") int id){
+        Article article = (Article) articleService.findById(id);
+//        article.setArticleLikeCount(article.getArticleLikeCount()+1);
+        article.setIpAddress(article.getIpAddress());
+        articleService.updateArticle(article);
+        return article;
     }
     
 }

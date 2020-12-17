@@ -18,6 +18,10 @@ public class Article {
     private int id;
     private String articleTitle;
     /**
+     * 用户ip地址
+     */
+    private String ipAddress;
+    /**
      * Article content after render to html.
      */
     private String articleContentHtml;
